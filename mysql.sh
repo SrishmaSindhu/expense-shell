@@ -9,6 +9,9 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+echo "please enter db password"
+read -s Mysql_root_password
+
 
 if [ $USERID -ne 0 ]
 then 
@@ -41,11 +44,11 @@ VALIDATE() {
   # VALIDATE $? "setting up root password"
 
   #below code used for idompotent in nature
-  mysql -h db-shellscript.sdevops.store -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+  mysql -h db-shellscript.sdevops.store -uroot -p${Mysql_root_password} -e 'show databases;' &>>$LOGFILE
 
   if [ $? -ne 0 ]
   then 
-    mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+    mysql_secure_installation --set-root-pass ${Mysql_root_password} &>>$LOGFILE
     VALIDATE $? "MySQL Root password setup"
   else
     echo -e "MySQL Root password already setup.. $Y SKIPPING $N"
