@@ -3,7 +3,7 @@ Description = Backend Service
 
 [Service]
 User=expense
-Environment=DB_HOST="backend.shellscript.sdevops.store"
+Environment=DB_HOST="db-shellscript.sdevops.store"
 ExecStart=/bin/node /app/index.js
 SyslogIdentifier=backend
 
